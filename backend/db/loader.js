@@ -24,10 +24,7 @@ const load = (db) => {
 
   for (let name in models) {
     const extendModel = extend(name, models[name]);
-    console.log('SZPAK', name);
-    console.log('SZPAK', 'stst');
     compiledModels[name] = db.model(name, extendModel);
-    console.log('SZPAK', 'tuatj');
   }
 
   console.log('[MongoDB] Extensions and models compiled');

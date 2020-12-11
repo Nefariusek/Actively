@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "mon": "nodemon -r dotenv/config ./app.js",
     "start": "node -r dotenv/config ./app.js",
-    "dev-web": "concurrently -n react,express -k \"cd ../frontend && npm run start-web\"  \"npm run mon\""
+    "dev-web": "concurrently -n react,express -k \"cd ../frontend && npm run start\"  \"npm run mon\""
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.2.0",
-    "joi": "^17.3.0",
+    "joi": "^14.3.1",
     "joi-objectid": "^3.0.1",
     "joi-password-complexity": "^5.0.2",
     "jsonwebtoken": "^8.5.1",

@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 import Store from '../../Store';
 import ErrorMessage from '../ErrorMessage';
+import setHeaders from '../../utils/setHeaders';
 const axios = require('axios');
 
 class LoginPanel extends React.Component {
@@ -22,27 +23,20 @@ class LoginPanel extends React.Component {
       const res = await axios({
         method: 'post',
         url: '/api/auth',
-        data: data,
-        headers: {
-          'Content-Type': 'application/json',
+        headers: setHeaders(),
+        data: {
+          email: this.state.email,
+          password: this.state.password,
         },
       });
-      console.log(res.status);
-
-      if (res.status === 203) {
-        localStorage.setItem('email', this.state.email);
-        document.location.href = '/login';
-      } else if (res.status === 200) {
+      if (res.status === 200) {
         const token = res.headers['x-auth-token'];
         localStorage.setItem('token', token);
         localStorage.setItem('id', jwt(token)._id);
         this.context.changeStore('isLogged', true);
-        this.setState({ isLogged: true });
-      } else {
-        this.setState({ invalidData: true });
+        document.location.href = '/homepage';
       }
-    } catch (error) {
-      console.error('Error Login:', error);
+    } catch (err) {
       this.setState({ invalidData: true });
     }
   };

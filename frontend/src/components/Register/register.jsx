@@ -49,7 +49,7 @@ class Login extends React.Component {
 
   checkEmail = async () => {
     await axios({
-      url: 'api/users',
+      url: '/api/users',
       method: 'get',
       headers: {
         'Content-Type': 'application/json',

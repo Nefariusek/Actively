@@ -22,18 +22,18 @@ class HomepageContent extends React.Component {
           </GridColumn>
           <GridColumn>
             <Segment>
-              <NavButton icon="users" color="green" description="btn1" link="/" />
+              <NavButton icon="book" color="grey" description="Questbook" link="/questbook" />
             </Segment>
             <Segment>
-              <NavButton icon="users" color="grey" description="btn2" link="/" />
+              <NavButton icon="users" color="blue" description="Social" link="/social" />
             </Segment>
           </GridColumn>
           <GridColumn>
             <Segment>
-              <NavButton icon="users" color="blue" description="btn3" link="/" />
+              <NavButton icon="boxes" color="brown" description="Inventory" link="/inventory" />
             </Segment>
             <Segment>
-              <NavButton icon="users" color="brown" description="btn4" link="/" />
+              <NavButton icon="chart bar" color="green" description="Profile" link="/profile" />
             </Segment>
           </GridColumn>
         </Grid.Row>

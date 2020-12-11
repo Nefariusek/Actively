@@ -57,11 +57,11 @@ const AppBar = () => {
             <br></br>
             <Menu.Item color="green" as={NavLink} name="Inventory" to="/inventory" activeClassName="active" />
             <br></br>
-            <Menu.Item color="green" as={NavLink} name="Guild" to="/guild" activeClassName="active" />
+            <Menu.Item color="green" as={NavLink} name="Social" to="/social" activeClassName="active" />
             <br></br>
           </Menu.Menu>
           <Menu.Menu position="right">
-            <Menu.Item color="green" as={NavLink} name={me ? me.name : 'user'} to="/profile" activeClassName="active" />
+            <Menu.Item color="green" as={NavLink} name="Profile" to="/profile" activeClassName="active" />
             <Menu.Item color="green" as={Link} name="Log out" to="/" onClick={handleLogout} />
           </Menu.Menu>
         </>

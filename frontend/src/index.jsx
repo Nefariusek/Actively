@@ -67,7 +67,7 @@ const App = () => {
           <PrivateRoute path="/characterCreation" component={CharacterCreation} />
           <Route render={() => <Redirect to="/homepage" />} />
 
-          {/* <PrivateRoute exact path="/tasks" component={Quests} /> */}
+          {/* <PrivateRoute exact path="/quests" component={Quests} /> */}
           {/* <PrivateRoute exact path="/questbook" component={Questbook} /> */}
           {/* <PrivateRoute exact path="/questbook/addCustomTask" component={Quests} /> */}
           {/* <PrivateRoute exact path="/shop" component={Shop} /> */}

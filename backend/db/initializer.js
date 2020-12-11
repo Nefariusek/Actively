@@ -139,7 +139,7 @@ const createCharacters = async (
   const characterData = arrayWithCount(amount)((x) => {
     return {
       name: 'Administrator',
-      species: 'Warrior',
+      charClass: 'Warrior',
       level: 3,
       experience_points: 23,
       experience_required: 100,

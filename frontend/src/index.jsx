@@ -12,6 +12,14 @@ import Homepage from './views/Homepage';
 import Login from './views/Login';
 import Register from './views/Register';
 
+// import Quests from './views/Quests';
+import CharacterCreation from './views/CharacterCreation';
+//import Statistics from './views/Statistics';
+// import Questbook from './views/Questbook';
+// import Shop from './views/Shop';
+//import Inventory from './views/Inventory';
+//import Guild from './views/Guild';
+
 const styleLink = document.createElement('link');
 styleLink.rel = 'stylesheet';
 styleLink.href = 'https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css';
@@ -56,6 +64,15 @@ const App = () => {
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/register" component={Register} />
           <PrivateRoute path="/homepage" component={Homepage} />
+          <PrivateRoute path="/characterCreation" component={CharacterCreation} />
+          <Route render={() => <Redirect to="/homepage" />} />
+
+          {/* <PrivateRoute exact path="/tasks" component={Quests} /> */}
+          {/* <PrivateRoute exact path="/questbook" component={Questbook} /> */}
+          {/* <PrivateRoute exact path="/questbook/addCustomTask" component={Quests} /> */}
+          {/* <PrivateRoute exact path="/shop" component={Shop} /> */}
+          {/* <PrivateRoute exact path="/inventory" component={Inventory} /> */}
+          {/* <PrivateRoute exact path="/guild" component={Guild} /> */}
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Container>

@@ -11,7 +11,7 @@ const characterSchema = new mongoose.Schema({
     maxlength: 16,
     trim: true,
   },
-  class: {
+  charClass: {
     type: String,
     enum: ['', 'Warrior', 'Hunter', 'Mage'],
     default: '',
@@ -81,7 +81,7 @@ const characterSchema = new mongoose.Schema({
 const validateCharacter = (character) => {
   const schema = Joi.object({
     name: Joi.string().required().min(5).max(16).trim(),
-    species: Joi.valid('Warrior', 'Hunter', 'Mage'),
+    charClass: Joi.valid('Warrior', 'Hunter', 'Mage'),
     level: Joi.number().min(0),
     experience_points: Joi.number().min(0),
     experience_required: Joi.number().min(0),

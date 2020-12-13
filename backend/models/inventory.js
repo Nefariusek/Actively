@@ -21,7 +21,7 @@ const inventorySchema = new mongoose.Schema({
 
 const validateInventory = (inventory) => {
   const schema = Joi.object({
-    equippedItems: Joi.array().items(Joi.object),
+    equipped: Joi.array().items(Joi.object),
     backpack: Joi.array().items(Joi.object),
     gold: Joi.number().min(0),
   });

@@ -36,7 +36,7 @@ const main = async () => {
   app.use('/api/users', users);
   app.use('/api/auth', auth);
   app.use('/api/characters', characters);
-  //app.use('/api/item', item);
+  app.use('/api/item', item);
   app.use('/api/inventory', inventory);
   //app.use('/api/quests', quests);
   //app.use('/api/guilds', guilds);

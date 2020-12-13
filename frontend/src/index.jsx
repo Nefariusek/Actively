@@ -12,13 +12,13 @@ import Homepage from './views/Homepage';
 import Login from './views/Login';
 import Register from './views/Register';
 
-// import Quests from './views/Quests';
+import Quests from './views/Quests';
 import CharacterCreation from './views/CharacterCreation';
-//import Statistics from './views/Statistics';
-// import Questbook from './views/Questbook';
-// import Shop from './views/Shop';
-//import Inventory from './views/Inventory';
-//import Guild from './views/Guild';
+import Profile from './views/Profile';
+import Questbook from './views/Questbook';
+import Shop from './views/Shop';
+import Inventory from './views/Inventory';
+import Social from './views/Social';
 
 const styleLink = document.createElement('link');
 styleLink.rel = 'stylesheet';
@@ -65,14 +65,14 @@ const App = () => {
           <PublicRoute path="/register" component={Register} />
           <PrivateRoute path="/homepage" component={Homepage} />
           <PrivateRoute path="/characterCreation" component={CharacterCreation} />
+          <PrivateRoute path="/shop" component={Shop} />
+          <PrivateRoute path="/inventory" component={Inventory} />
+          <PrivateRoute path="/quests" component={Quests} />
+          <PrivateRoute path="/social" component={Social} />
+          <PrivateRoute path="/questbook" component={Questbook} />
+          <PrivateRoute path="/profile" component={Profile} />
           <Route render={() => <Redirect to="/homepage" />} />
 
-          {/* <PrivateRoute exact path="/quests" component={Quests} /> */}
-          {/* <PrivateRoute exact path="/questbook" component={Questbook} /> */}
-          {/* <PrivateRoute exact path="/questbook/addCustomTask" component={Quests} /> */}
-          {/* <PrivateRoute exact path="/shop" component={Shop} /> */}
-          {/* <PrivateRoute exact path="/inventory" component={Inventory} /> */}
-          {/* <PrivateRoute exact path="/guild" component={Guild} /> */}
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Container>

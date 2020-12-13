@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     process.env.JWTPRIVATEKEY,
   );
 
-  res.header('x-auth-token', token).send(_.pick(user, ['_id', 'username', 'email']));
+  res.header('x-auth-token', token).send(_.pick(user, ['_id', 'username', 'email', 'character_id']));
 });
 
 module.exports = router;

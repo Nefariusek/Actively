@@ -17,7 +17,6 @@ class LoginPanel extends React.Component {
 
   onButtonSubmit = async (e) => {
     e.preventDefault();
-    const data = this.state;
     delete this.state['invalidData'];
     try {
       const res = await axios({
@@ -34,7 +33,7 @@ class LoginPanel extends React.Component {
         localStorage.setItem('token', token);
         localStorage.setItem('id', jwt(token)._id);
         this.context.changeStore('isLogged', true);
-        document.location.href = '/homepage';
+        this.context.changeStore('character_id', res.data.character_id);
       }
     } catch (err) {
       this.setState({ invalidData: true });
@@ -86,8 +85,8 @@ class LoginPanel extends React.Component {
                   Sign In
                 </Button>
               </Grid.Row>
-              <Grid.Row textAlign="center" padded centered>
-                <Button color="gray" type="submit">
+              <Grid.Row textAlign="center" centered>
+                <Button color="grey" type="submit">
                   Sign Up
                 </Button>
               </Grid.Row>

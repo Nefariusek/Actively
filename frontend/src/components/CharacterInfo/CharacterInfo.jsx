@@ -4,7 +4,7 @@ import { Icon, Grid, Container, Progress, Label } from 'semantic-ui-react';
 import Store from '../../Store';
 import setHeaders from '../../utils/setHeaders';
 
-class WorkerInfo extends React.Component {
+class CharacterInfo extends React.Component {
   state = {
     name: '',
     charClass: '',
@@ -15,18 +15,18 @@ class WorkerInfo extends React.Component {
     max_endurance: '',
     experience_points: '',
     experience_required: '',
+    loaded: false,
   };
 
   static contextType = Store;
 
   getCharacter = async () => {
     await axios({
-      url: `api/characters/${this.context.me.character_id}`,
+      url: `api/characters/${this.context.character_id}`,
       method: 'GET',
       headers: setHeaders(),
     }).then(
       (res) => {
-        console.log(res);
         this.setState({
           name: res.data.name,
           charClass: res.data.charClass,
@@ -38,6 +38,10 @@ class WorkerInfo extends React.Component {
           experience_points: res.data.experience_points,
           experience_required: res.data.experience_required,
         });
+        this.context.changeStore('character_id', res.data._id);
+        this.context.changeStore('inventory_id', res.data.inventory_id);
+        this.context.changeStore('social_id', res.data.social_id);
+        this.context.changeStore('statistics_id', res.data.statistics_id);
       },
       (err) => {
         console.log(err);
@@ -51,9 +55,9 @@ class WorkerInfo extends React.Component {
   };
 
   componentDidMount = async () => {
-    console.log(this.context.me);
+    this.setState({ loaded: true });
     await this.getCharacter();
-    this.setState({});
+    console.log(this.context);
   };
 
   render() {
@@ -106,4 +110,4 @@ class WorkerInfo extends React.Component {
   }
 }
 
-export default WorkerInfo;
+export default CharacterInfo;

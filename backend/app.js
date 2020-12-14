@@ -38,8 +38,8 @@ const main = async () => {
   app.use('/api/characters', characters);
   app.use('/api/item', item);
   app.use('/api/inventory', inventory);
-  //app.use('/api/quests', quests);
-  //app.use('/api/guilds', guilds);
+  app.use('/api/quests', quests);
+  app.use('/api/guilds', guilds);
   app.use('/api/questbook', questbook);
   app.use('/api/statistics', statistics);
   app.use('/api/social', social);

@@ -34,6 +34,11 @@ const questSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  status: {
+    type: String,
+    enum: ['', 'in_progress', 'completed', 'failed'],
+    default: '',
+  },
 });
 
 const validateQuest = (quest) => {
@@ -45,6 +50,7 @@ const validateQuest = (quest) => {
     experience_reward: Joi.number().min(0),
     gold_reward: Joi.number().min(0),
     penalty: Joi.number().min(0),
+    status: Joi.valid('', 'in_progress', 'completed', 'failed'),
   });
 
   return schema.validate(quest);

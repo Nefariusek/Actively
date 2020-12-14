@@ -42,6 +42,7 @@ class CharacterInfo extends React.Component {
         this.context.changeStore('inventory_id', res.data.inventory_id);
         this.context.changeStore('social_id', res.data.social_id);
         this.context.changeStore('statistics_id', res.data.statistics_id);
+        this.context.changeStore('questbook_id', res.data.questbook_id);
       },
       (err) => {
         console.log(err);
@@ -85,6 +86,7 @@ class CharacterInfo extends React.Component {
             percent={this.calculatePercent(this.state.health, this.state.max_health)}
             progress
             label="Health"
+            precision="0"
           />
         </Grid.Row>
         <br></br>
@@ -94,6 +96,7 @@ class CharacterInfo extends React.Component {
             percent={this.calculatePercent(this.state.endurance, this.state.max_endurance)}
             progress
             label="Endurance"
+            precision="0"
           />
         </Grid.Row>
         <br></br>
@@ -103,6 +106,7 @@ class CharacterInfo extends React.Component {
             percent={this.calculatePercent(this.state.experience_points, this.state.experience_required)}
             progress
             label="Experience"
+            precision="0"
           />
         </Grid.Row>
       </Container>

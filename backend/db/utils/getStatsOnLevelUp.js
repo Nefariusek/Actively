@@ -10,7 +10,7 @@ const getStatsOnLevelUp = (character, level) => {
 
   let baseExp = 0;
   for (let i = 1; i < level + 1; i++) {
-    baseExp += i * 100;
+    baseExp += i * 300;
   }
 
   //fix

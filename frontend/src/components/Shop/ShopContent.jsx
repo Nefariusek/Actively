@@ -45,6 +45,37 @@ class ShopContent extends React.Component {
     );
   };
 
+  fetchBuyItem = async (item) => {
+    await axios({
+      url: `/api/inventory/${this.context.inventory_id}/backpack`,
+      method: 'put',
+      data: {
+        item: {
+          _id: item._id,
+        },
+      },
+      headers: setHeaders(),
+    })
+      .then(() => {})
+      .catch((error) => console.error(error));
+    let afterPay = this.state.gold - item.price;
+    this.setState({ gold: afterPay });
+    await this.fetchPayGold(afterPay);
+  };
+
+  fetchPayGold = async (gold) => {
+    await axios({
+      url: `/api/inventory/${this.context.inventory_id}/gold`,
+      method: 'put',
+      data: {
+        inventory: {
+          gold: gold,
+        },
+      },
+      headers: setHeaders(),
+    }).catch((error) => console.error(error));
+  };
+
   componentDidMount = async () => {
     await this.getItems();
     await this.getInventory();

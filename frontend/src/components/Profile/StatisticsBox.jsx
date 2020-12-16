@@ -45,7 +45,7 @@ class StatisticsBox extends React.Component {
         <List>
           <List.Item>
             <List.Header>Playing Since</List.Header>
-            {this.state.playing_since}
+            {this.state.playing_since.split('T')[0]}
           </List.Item>
           <List.Item>
             <List.Header>Quests Completed</List.Header>

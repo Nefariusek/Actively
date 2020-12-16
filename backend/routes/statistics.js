@@ -23,4 +23,23 @@ router.get('/:id', async (req, res) => {
   res.send(statistics);
 });
 
+router.put('/:id/quests_completed', async (req, res) => {
+  const Statistics = res.locals.models.statistics;
+  let temp = await Statistics.findById(req.params.id);
+  let value = temp.quests_completed + 1;
+  let stats = await Statistics.findByIdAndUpdate(
+    req.params.id,
+    {
+      quests_completed: value,
+    },
+    {
+      new: true,
+    },
+  );
+
+  if (!stats) return res.status(404).send(`Statistics with id ${req.params.id} was not found.`);
+
+  res.send('quests_completed incremented');
+});
+
 module.exports = router;

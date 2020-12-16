@@ -8,7 +8,6 @@ const QuestbookContent = () => {
     <Container>
       <QuestbookMenu />
       <QuestbookList />
-      questbook
     </Container>
   );
 };

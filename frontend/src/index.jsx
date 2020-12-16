@@ -41,6 +41,7 @@ const App = () => {
           return;
         }
         const data = await response.json();
+        changeStore('character_id', data.character_id);
         changeStore('isLogged', true);
         changeStore('me', data);
         if (data.character_id) {

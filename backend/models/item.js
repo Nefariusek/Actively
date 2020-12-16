@@ -30,6 +30,10 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  picture: {
+    type: String,
+    default: '',
+  },
 });
 
 const validateItem = (item) => {
@@ -40,6 +44,7 @@ const validateItem = (item) => {
     effect: Joi.string(),
     effect_value: Joi.number(),
     price: Joi.number(),
+    picture: Joi.string(),
   });
 
   return schema.validate(item);

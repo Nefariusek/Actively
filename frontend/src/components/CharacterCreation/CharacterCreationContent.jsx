@@ -136,19 +136,22 @@ class CharacterCreation extends React.Component {
     if (this.state.charClass === 'Warrior') {
       this.setState({
         health: 35,
-        strength: 6,
+        strength: 11,
+        dexterity: 6,
         wisdom: 1,
       });
     } else if (this.state.charClass === 'Hunter') {
       this.setState({
         health: 31,
-        strength: 11,
+        strength: 6,
+        dexterity: 11,
         wisdom: 1,
       });
     } else if (this.state.charClass === 'Mage') {
       this.setState({
         health: 31,
-        strength: 1,
+        strength: 6,
+        dexterity: 1,
         wisdom: 11,
       });
     }
@@ -228,6 +231,11 @@ class CharacterCreation extends React.Component {
       await this.postCharacter();
       await this.putCharId();
       this.context.changeStore('hasCharacter', true);
+      this.context.changeStore('character_id', this.state._id);
+      this.context.changeStore('statistics_id', this.state.statistics_id);
+      this.context.changeStore('inventory_id', this.state.inventory_id);
+      this.context.changeStore('social_id', this.state.social_id);
+      this.context.changeStore('questbook_id', this.state.questbook_id);
     }
   };
 

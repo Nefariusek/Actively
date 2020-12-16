@@ -72,8 +72,6 @@ router.put('/:id/quest', async (req, res) => {
   const Questbook = res.locals.models.questbook;
   const Quest = res.locals.models.quest;
   let quest = new Quest(req.body);
-  // console.log(req.body);
-  // console.log(quest);
   const { error } = validateQuest(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

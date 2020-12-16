@@ -33,6 +33,7 @@ class LoginPanel extends React.Component {
         localStorage.setItem('token', token);
         localStorage.setItem('id', jwt(token)._id);
         this.context.changeStore('isLogged', true);
+        this.context.changeStore('user_id', res.data._id);
         this.context.changeStore('character_id', res.data.character_id);
       }
     } catch (err) {

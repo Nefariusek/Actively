@@ -23,7 +23,6 @@ class QuestbookList extends React.Component {
       headers: setHeaders(),
     }).then(
       (res) => {
-        console.log(res);
         this.setState({ results: res.data });
       },
       (err) => {

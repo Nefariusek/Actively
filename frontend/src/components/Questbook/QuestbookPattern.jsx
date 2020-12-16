@@ -4,7 +4,6 @@ import Store from '../../Store';
 import TopPortal from '../Utils/TopPortal';
 import setHeaders from '../../utils/setHeaders';
 import axios from 'axios';
-const _ = require('lodash');
 
 class QuestPattern extends React.Component {
   constructor(props) {
@@ -50,6 +49,39 @@ class QuestPattern extends React.Component {
     });
   };
 
+  putEndurance = async (endurance) => {
+    await axios({
+      url: `/api/characters/${this.context.character_id}/endurance`,
+      method: 'put',
+      headers: setHeaders(),
+      data: { endurance: endurance },
+    }).then((response) => {
+      // console.log(response);
+    });
+  };
+
+  putQuestCompleted = async () => {
+    await axios({
+      url: `/api/statistics/${this.context.statistics_id}/quests_completed`,
+      method: 'put',
+      headers: setHeaders(),
+      data: {},
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  putGold = async (gold) => {
+    await axios({
+      url: `/api/inventory/${this.context.inventory_id}/gold`,
+      method: 'put',
+      headers: setHeaders(),
+      data: { inventory: { gold: gold } },
+    }).then((response) => {
+      // console.log(response);
+    });
+  };
+
   putHealth = async (health) => {
     await axios({
       url: `/api/characters/${this.context.character_id}/health`,
@@ -68,8 +100,11 @@ class QuestPattern extends React.Component {
     const character = await responseChar.json();
     const gold = inventory.gold + this.props.questbook.gold_reward;
     const exp_points = character.experience_points + this.props.questbook.experience_reward;
+    const endurance = character.endurance - 20;
     await this.putGold(gold);
     await this.putExp(exp_points);
+    await this.putEndurance(endurance);
+    await this.putQuestCompleted();
   };
 
   onFinishButtonSubmit = () => {
@@ -98,9 +133,7 @@ class QuestPattern extends React.Component {
     if (this.props.questbook.status === 'in_progress') return { name: 'clock' };
   }
 
-  componentDidMount = async () => {
-    console.log(this.props);
-  };
+  componentDidMount = async () => {};
 
   render() {
     return (

@@ -50,9 +50,13 @@ class ShopContent extends React.Component {
       url: `/api/inventory/${this.context.inventory_id}/backpack`,
       method: 'put',
       data: {
-        item: {
-          _id: item._id,
-        },
+        name: item.name,
+        description: item.description,
+        slot: item.slot,
+        picture: item.picture,
+        effect: item.effect,
+        effect_value: item.effect_value,
+        price: item.price,
       },
       headers: setHeaders(),
     })

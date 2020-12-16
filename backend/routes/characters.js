@@ -31,6 +31,68 @@ router.get('/:id', async (req, res) => {
   res.send(character);
 });
 
+//[working]
+router.put('/:id/health', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      if (req.body.health > 0) {
+        Character.findByIdAndUpdate(
+          req.params.id,
+          {
+            health: req.body.health,
+          },
+          {
+            new: true,
+          },
+        ).then(
+          (r) => {
+            res.send('Health updated!');
+          },
+          (err) => {
+            res.status(403).send('Bad request!');
+          },
+        );
+      } else {
+        gameOver(Character, result);
+      }
+    }
+  });
+});
+
+//[working]
+router.put('/:id/endurance', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      if (req.body.endurance > 0) {
+        Character.findByIdAndUpdate(
+          req.params.id,
+          {
+            endurance: req.body.endurance,
+          },
+          {
+            new: true,
+          },
+        ).then(
+          (r) => {
+            res.send('Endurance updated!');
+          },
+          (err) => {
+            res.status(403).send('Bad request!');
+          },
+        );
+      } else {
+        gameOver(Character, result);
+      }
+    }
+  });
+});
+
 router.put('/:id/experience_points', (req, res) => {
   const Character = res.locals.models.character;
   getCharacters(Character, req.params.id).then((result) => {

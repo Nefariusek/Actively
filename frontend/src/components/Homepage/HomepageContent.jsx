@@ -6,9 +6,13 @@ import NavButton from '../NavButton/NavButton';
 import Store from '../../Store';
 
 class HomepageContent extends React.Component {
-  state = {};
+  state = { loaded: false };
 
   static contextType = Store;
+
+  refreshInfo() {
+    this.setState({ loaded: !this.state.loaded });
+  }
 
   render() {
     if (!this.context.isLogged) return <Redirect to="/login" />;
@@ -17,7 +21,7 @@ class HomepageContent extends React.Component {
         <Grid.Row>
           <GridColumn>
             <Segment>
-              <CharacterInfo />
+              <CharacterInfo character={this.context.character_id} />
             </Segment>
           </GridColumn>
           <GridColumn>

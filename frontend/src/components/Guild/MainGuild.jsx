@@ -115,7 +115,7 @@ class MainGuild extends React.Component {
     this.setState({ open: false });
   }
 
-  handleInputChange = (e, { name, value }) => this.setState({ name: value, triedToSubmit: false });
+  handleInputChange = (e, { name, value }) => this.setState({ [name]: value, triedToSubmit: false });
 
   componentDidMount = async () => {
     await this.getGuilds();
@@ -138,7 +138,7 @@ class MainGuild extends React.Component {
                 <Form onSubmit={this.handleButtonClick} inverted>
                   <Grid>
                     <Grid.Row centered>
-                      <Header inverted>Character name</Header>
+                      <Header>Guild Name</Header>
                     </Grid.Row>
                     <Grid.Row centered>
                       <Form.Group inline>
@@ -152,7 +152,7 @@ class MainGuild extends React.Component {
                       </Form.Group>
                     </Grid.Row>
                     <Grid.Row centered>
-                      <Header inverted>Character class</Header>
+                      <Header>Guild Description</Header>
                     </Grid.Row>
                     <Grid.Row centered>
                       <Form.Group inline>

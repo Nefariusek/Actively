@@ -23,4 +23,20 @@ router.get('/:id', async (req, res) => {
   res.send(social);
 });
 
+router.put('/:id/main_guild', async (req, res) => {
+  const Social = res.locals.models.social;
+  const { error } = validateSocial(req.body.inventory);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const social = await Social.findByIdAndUpdate(
+    req.params.id,
+    {
+      main_guild: req.body.main_guild,
+    },
+    { new: true },
+  );
+  if (!social) return res.status(404).send('The social center with the given ID was not found.');
+  res.send(social);
+});
+
 module.exports = router;

@@ -43,7 +43,7 @@ class GuildList extends React.Component {
     return (
       <div>
         <Segment inverted>
-          <Header>Guilds</Header>
+          <Header>Other Guilds</Header>
         </Segment>
         <Segment>
           <GuildTable ref={this.guildTableRef} />

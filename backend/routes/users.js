@@ -39,6 +39,26 @@ router.get('/me', auth, async (req, res) => {
   res.send(_.pick(user, ['_id', 'name', 'email', 'character_id']));
 });
 
+router.put('/:id/password', async (req, res) => {
+  const User = res.locals.models.user;
+  let user;
+  const salt = await bcrypt.genSalt();
+  let password = await bcrypt.hash(req.body.password, salt);
+  user = await User.findByIdAndUpdate(
+    req.params.id,
+    {
+      password: password,
+    },
+    {
+      new: true,
+    },
+  );
+
+  if (!user) return res.status(404).send('The user with the given ID was not found.');
+
+  res.send('Password changed');
+});
+
 router.get('/:id', async (req, res) => {
   const User = res.locals.models.user;
   let user;

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Item, Grid, Segment, Header } from 'semantic-ui-react';
+import { Item, Grid, Segment, Header, Label } from 'semantic-ui-react';
 import setHeaders from '../../utils/setHeaders';
 import axios from 'axios';
 import Store from '../../Store';
+import EquipItem from './EquipItem';
 
 class InventoryBackpack extends React.Component {
   state = { items: [] };
@@ -50,6 +51,11 @@ class InventoryBackpack extends React.Component {
                         Slot: {item.slot} <br />
                         Price: {item.price} <br /> <br /> <br />
                       </Item.Description>
+                      <Item.Extra>
+                        <Label horizontal attached="bottom" size="tiny" color="grey">
+                          <EquipItem item={item} />
+                        </Label>
+                      </Item.Extra>
                     </Item.Content>
                   </Item>
                 </Segment>

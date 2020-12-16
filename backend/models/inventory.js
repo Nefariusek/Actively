@@ -3,10 +3,25 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const inventorySchema = new mongoose.Schema({
-  equipped: {
+  bodyItem: {
     type: Object,
     ref: 'Item',
-    default: [],
+    default: {},
+  },
+  weaponItem: {
+    type: Object,
+    ref: 'Item',
+    default: {},
+  },
+  headItem: {
+    type: Object,
+    ref: 'Item',
+    default: {},
+  },
+  legsItem: {
+    type: Object,
+    ref: 'Item',
+    default: {},
   },
   backpack: {
     type: Object,
@@ -21,7 +36,10 @@ const inventorySchema = new mongoose.Schema({
 
 const validateInventory = (inventory) => {
   const schema = Joi.object({
-    equipped: Joi.array().items(Joi.object),
+    bodyItem: Joi.object(),
+    weaponItem: Joi.object(),
+    legsItem: Joi.object(),
+    headItem: Joi.object(),
     backpack: Joi.array().items(Joi.object),
     gold: Joi.number().min(0),
   });

@@ -6,7 +6,7 @@ import setHeaders from '../../utils/setHeaders';
 
 class CharacterInfo extends React.Component {
   state = {
-    name: 'Nefarius',
+    name: '',
     charClass: 'Hunter',
     level: 1,
     health: 100,
@@ -22,7 +22,7 @@ class CharacterInfo extends React.Component {
 
   getCharacter = async () => {
     await axios({
-      url: `api/characters/${this.props.character}`,
+      url: `api/characters/${this.context.character_id}`,
       method: 'GET',
       headers: setHeaders(),
     }).then(
@@ -59,6 +59,12 @@ class CharacterInfo extends React.Component {
     console.log(this.context);
     this.setState({ loaded: true });
     await this.getCharacter();
+  };
+
+  componentDidUpdate = async (prevProps, prevState, snapshot) => {
+    if (this.state !== prevState) {
+      await this.getCharacter();
+    }
   };
 
   render() {

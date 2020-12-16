@@ -98,6 +98,7 @@ class QuestbookList extends React.Component {
 
   componentDidUpdate() {
     this.questbookTableRef.current.setState({ results: this.state.results });
+    this.getQuestbook();
   }
 
   render() {

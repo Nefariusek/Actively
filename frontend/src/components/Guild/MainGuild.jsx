@@ -5,6 +5,7 @@ import { Button, Header, Segment, Modal, Form, Grid, TextArea, List } from 'sema
 import Store from '../../Store';
 import setHeaders from '../../utils/setHeaders';
 
+const listOfPlayers = [];
 class MainGuild extends React.Component {
   state = {
     name: '',
@@ -13,8 +14,14 @@ class MainGuild extends React.Component {
     main_guild_members: 0,
     main_guild_name: '',
     main_guild_leader: '',
+    main_guild_id: '',
+
+    member_id: '',
+
     loading: true,
     open: false,
+    openInvite: false,
+    players: '',
   };
 
   static contextType = Store;
@@ -62,6 +69,7 @@ class MainGuild extends React.Component {
           main_guild_description: response.data.description,
           main_guild_members: response.data.members.length,
           main_guild_name: response.data.name,
+          main_guild_id: response.data._id,
         });
         await this.getLeaderName(response.data.leader);
       },
@@ -106,6 +114,27 @@ class MainGuild extends React.Component {
     );
   };
 
+  getCharacters = async () => {
+    await axios({
+      url: `api/characters`,
+      method: 'GET',
+      headers: setHeaders(),
+    }).then(
+      (res) => {
+        console.log(res.data);
+        res.data.forEach((player) => {
+          let char = { key: player._id, text: player.name, value: player._id };
+          listOfPlayers.push(char);
+        });
+        this.setState({ players: res.data });
+        console.log(listOfPlayers);
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  };
+
   handleButtonClick = async () => {
     await this.postGuild();
     this.setState({ open: false });
@@ -115,11 +144,34 @@ class MainGuild extends React.Component {
     this.setState({ open: false });
   }
 
+  handleInviteClick = async () => {
+    const memberToInsert = { member: this.state.member_id };
+
+    const res = await axios.put(`/api/guilds/${this.state.main_guild_id}/members`, memberToInsert).catch((err) => {
+      this.setState({ open: false });
+    });
+
+    this.setState({ openInvite: false });
+  };
+
+  onExitInviteClick() {
+    this.setState({ openInvite: false });
+  }
+
   handleInputChange = (e, { name, value }) => this.setState({ [name]: value, triedToSubmit: false });
 
   componentDidMount = async () => {
     await this.getGuilds();
     await this.getMainGuild();
+    await this.getCharacters();
+  };
+
+  componentDidUpdate = async (prevProps, prevState, snapshot) => {
+    if (this.state.open !== prevState.open || this.state.openInvite !== prevState.openInvite) {
+      await this.getGuilds();
+      await this.getMainGuild();
+      await this.getCharacters();
+    }
   };
 
   render() {
@@ -177,6 +229,47 @@ class MainGuild extends React.Component {
             </Modal.Content>
             <Modal.Actions>
               <Button color="black" onClick={() => this.onExitClick()}>
+                Exit
+              </Button>
+            </Modal.Actions>
+          </Modal>
+          <Modal
+            open={this.state.openInvite}
+            onOpen={() => this.setState({ openInvite: true })}
+            trigger={<Button floated="right">Invite</Button>}
+          >
+            <Modal.Header>Invite member</Modal.Header>
+            <Modal.Content image>
+              <Modal.Description>
+                <Form onSubmit={this.handleInviteClick} inverted>
+                  <Grid>
+                    <Grid.Row centered>
+                      <Header>Player Name</Header>
+                    </Grid.Row>
+                    <Grid.Row centered>
+                      <Form.Group inline>
+                        <Form.Select
+                          required
+                          label="Type"
+                          options={listOfPlayers}
+                          placeholder="Type"
+                          name="member_id"
+                          value={this.member_id}
+                          onChange={this.handleInputChange}
+                        />
+                      </Form.Group>
+                    </Grid.Row>
+                  </Grid>
+                  <Grid textAlign="center" padded>
+                    <Button type="submit" color="green">
+                      Invite
+                    </Button>
+                  </Grid>
+                </Form>
+              </Modal.Description>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button color="black" onClick={() => this.onExitInviteClick()}>
                 Exit
               </Button>
             </Modal.Actions>

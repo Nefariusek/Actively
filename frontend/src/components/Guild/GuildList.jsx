@@ -37,6 +37,7 @@ class GuildList extends React.Component {
 
   componentDidUpdate() {
     this.guildTableRef.current.setState({ results: this.state.results });
+    this.getGuilds();
   }
 
   render() {

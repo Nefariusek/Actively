@@ -93,6 +93,110 @@ router.put('/:id/endurance', (req, res) => {
   });
 });
 
+router.put('/:id/strength', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      Character.findByIdAndUpdate(
+        req.params.id,
+        {
+          strength: req.body.strength,
+        },
+        {
+          new: true,
+        },
+      ).then(
+        (r) => {
+          res.send('strengthupdated!');
+        },
+        (err) => {
+          res.status(403).send('Bad request!');
+        },
+      );
+    }
+  });
+});
+
+router.put('/:id/max_health', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      Character.findByIdAndUpdate(
+        req.params.id,
+        {
+          max_health: req.body.max_health,
+        },
+        {
+          new: true,
+        },
+      ).then(
+        (r) => {
+          res.send('strengthupdated!');
+        },
+        (err) => {
+          res.status(403).send('Bad request!');
+        },
+      );
+    }
+  });
+});
+
+router.put('/:id/dexterity', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      Character.findByIdAndUpdate(
+        req.params.id,
+        {
+          dexterity: req.body.dexterity,
+        },
+        {
+          new: true,
+        },
+      ).then(
+        (r) => {
+          res.send('Dexterity updated!');
+        },
+        (err) => {
+          res.status(403).send('Bad request!');
+        },
+      );
+    }
+  });
+});
+
+router.put('/:id/physical_power', (req, res) => {
+  const Character = res.locals.models.character;
+  getCharacters(Character, req.params.id).then((result) => {
+    if (!result) {
+      res.status(404).send(`Character with this id: ${req.params.id} not found`);
+    } else {
+      Character.findByIdAndUpdate(
+        req.params.id,
+        {
+          physical_power: req.body.physical_power,
+        },
+        {
+          new: true,
+        },
+      ).then(
+        (r) => {
+          res.send('Physical power updated!');
+        },
+        (err) => {
+          res.status(403).send('Bad request!');
+        },
+      );
+    }
+  });
+});
+
 router.put('/:id/experience_points', (req, res) => {
   const Character = res.locals.models.character;
   getCharacters(Character, req.params.id).then((result) => {

@@ -31,4 +31,28 @@ router.post('/', async (req, res) => {
   res.send(guild);
 });
 
+router.put('/:id/members', async (req, res) => {
+  const Guild = res.locals.models.guild;
+
+  let guild = await Guild.findById(req.params.id);
+  if (!guild) return res.status(404).send('The guild with given ID was not found');
+
+  const membersArray = guild.members;
+  let memberExist = membersArray.includes(req.body.member);
+  if (memberExist) return res.status(404).send('The member with given ID already exist');
+  else membersArray.push(req.body.member);
+
+  guild = await Guild.findByIdAndUpdate(
+    req.params.id,
+    {
+      members: membersArray,
+    },
+    {
+      new: true,
+    },
+  );
+
+  res.send(guild);
+});
+
 module.exports = router;

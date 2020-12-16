@@ -133,8 +133,6 @@ class QuestPattern extends React.Component {
     if (this.props.questbook.status === 'in_progress') return { name: 'clock' };
   }
 
-  componentDidMount = async () => {};
-
   render() {
     return (
       <Segment inverted>

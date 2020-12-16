@@ -22,7 +22,6 @@ const guildSchema = new mongoose.Schema({
   },
   members: {
     type: [ObjectId],
-    ref: 'Character',
     default: [],
   },
 });
